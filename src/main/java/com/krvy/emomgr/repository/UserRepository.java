@@ -1,4 +1,4 @@
-package com.krvy.emomgr.Repository;
+package com.krvy.emomgr.repository;
 
 import java.util.Optional;
 
@@ -22,5 +22,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     default User saveUser(User user) {
         return save(user);
     }
-
 }

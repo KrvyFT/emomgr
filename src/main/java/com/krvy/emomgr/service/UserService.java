@@ -1,7 +1,7 @@
 package com.krvy.emomgr.service;
 
-import com.krvy.emomgr.Repository.UserRepository;
 import com.krvy.emomgr.database.User;
+import com.krvy.emomgr.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
 
