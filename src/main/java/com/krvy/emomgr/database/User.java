@@ -13,24 +13,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "创建时间", nullable = false, unique = true, length = 50)
-    private Date create_time;
+    @Column(name = "create_time", nullable = false, unique = true, length = 50)
+    private Date createTime;
 
-    @Column(name = "更新时间", nullable = false, unique = true, length = 50)
-    private Date update_time;
+    @Column(name = "update_time", nullable = false, unique = true, length = 50)
+    private Date updateTime;
 
-    @Column(name = "用户名", nullable = false, unique = true, length = 50)
+    @Column(name = "username", nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(name = "密码", nullable = false, unique = true, length = 50)
+    @Column(name = "password", nullable = false, unique = true, length = 50)
     private String password;
 
-    @Column(name = "头像", nullable = false, unique = true, length = 50)
-    private String photo;
+    @Column(name = "avatar", nullable = false, unique = true, length = 50)
+    private String avatar;
 
-    @Column(name = "性别", nullable = false, unique = true, length = 50)
-    private boolean sex;
+    @Column(name = "sex", nullable = false, unique = true, length = 50)
+    private int sex;
 
-    @Column(name = "年龄", nullable = false, unique = true, length = 50)
+    @Column(name = "age", nullable = false, unique = true, length = 50)
     private int age;
 }
