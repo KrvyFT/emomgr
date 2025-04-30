@@ -3,9 +3,7 @@ package com.krvy.emomgr.database;
 import java.sql.Date;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "Employee")
 public class Employee {
@@ -13,21 +11,21 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "员工姓名", nullable = true, unique = false, length = 50)
+    @Column(name = "name", length = 100, nullable = true)
     private String name;
 
-    @Column(name = "所属部门ID", nullable = true, unique = true, length = 50)
-    private Long department_id;
+    @Column(name = "department_id", nullable = true)
+    private Long departmentId;
 
-    @Column(name = "职位", nullable = true, unique = false, length = 50)
+    @Column(name = "position", length = 100)
     private String position;
 
-    @Column(name = "入职日期", nullable = true, unique = false, length = 50)
-    private Date hire_date;
+    @Column(name = "hire_date")
+    private Date hireDate;
 
-    @Column(name = "创建时间", nullable = false, unique = false, length = 50)
-    private Date create_time;
+    @Column(name = "create_time")
+    private Date createTime;
 
-    @Column(name = "更新时间", nullable = false, unique = false, length = 50)
-    private Date update_time;
+    @Column(name = "update_time")
+    private Date updateTime;
 }
