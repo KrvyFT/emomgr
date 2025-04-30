@@ -36,3 +36,31 @@
 2025-04-30T10:52:17.155+08:00  INFO 42933 --- [emomgr] [main] com.example.MyApplication                : Started MyApplication in 1.693 seconds (process running for 1.95)
 2025-04-30T10:52:18.890+08:00  INFO 42933 --- [emomgr] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
 2025-04-30T10:52:18.894+08:00  INFO 42933 --- [emomgr] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T11:16:56.616+08:00  INFO 60345 --- [emomgr] [main] com.krvy.emomgr.Application              : Starting Application v1.0.0 using Java 24.0.1 with PID 60345 (/home/krvy/Projects/emomgr/target/emomgr-1.0.0.jar started by krvy in /home/krvy/Projects/emomgr)
+2025-04-30T11:16:56.619+08:00  INFO 60345 --- [emomgr] [main] com.krvy.emomgr.Application              : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T11:16:57.425+08:00  INFO 60345 --- [emomgr] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T11:16:57.433+08:00  INFO 60345 --- [emomgr] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T11:16:57.434+08:00  INFO 60345 --- [emomgr] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-04-30T11:16:57.454+08:00  INFO 60345 --- [emomgr] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T11:16:57.455+08:00  INFO 60345 --- [emomgr] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 777 ms
+2025-04-30T11:16:57.833+08:00  INFO 60345 --- [emomgr] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T11:16:57.847+08:00  INFO 60345 --- [emomgr] [main] com.krvy.emomgr.Application              : Started Application in 1.67 seconds (process running for 1.953)
+2025-04-30T11:17:06.525+08:00  INFO 60345 --- [emomgr] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T11:17:06.526+08:00  INFO 60345 --- [emomgr] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T11:17:06.527+08:00  INFO 60345 --- [emomgr] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-30T11:17:10.388+08:00  INFO 60345 --- [emomgr] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T11:17:10.396+08:00  INFO 60345 --- [emomgr] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T11:48:40.368+08:00  INFO 82900 --- [emomgr] [main] com.krvy.emomgr.Application              : Starting Application v1.0.0 using Java 24.0.1 with PID 82900 (/home/krvy/Projects/emomgr/target/emomgr-1.0.0.jar started by krvy in /home/krvy/Projects/emomgr)
+2025-04-30T11:48:40.371+08:00  INFO 82900 --- [emomgr] [main] com.krvy.emomgr.Application              : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T11:48:41.453+08:00  INFO 82900 --- [emomgr] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T11:48:41.477+08:00  INFO 82900 --- [emomgr] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T11:48:41.477+08:00  INFO 82900 --- [emomgr] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-04-30T11:48:41.498+08:00  INFO 82900 --- [emomgr] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T11:48:41.499+08:00  INFO 82900 --- [emomgr] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1049 ms
+2025-04-30T11:48:41.913+08:00  INFO 82900 --- [emomgr] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T11:48:41.930+08:00  INFO 82900 --- [emomgr] [main] com.krvy.emomgr.Application              : Started Application in 2.181 seconds (process running for 2.47)
+2025-04-30T11:49:01.935+08:00  INFO 82900 --- [emomgr] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T11:49:01.935+08:00  INFO 82900 --- [emomgr] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T11:49:01.936+08:00  INFO 82900 --- [emomgr] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-30T14:11:30.204+08:00  INFO 82900 --- [emomgr] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T14:11:30.222+08:00  INFO 82900 --- [emomgr] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
