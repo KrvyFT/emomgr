@@ -1,0 +1,38 @@
+2025-04-30T10:45:36.979+08:00  INFO 37371 --- [main] com.example.MyApplication                : Starting MyApplication v1.0.0 using Java 24.0.1 with PID 37371 (/home/krvy/Projects/emomgr/target/emomgr-1.0.0.jar started by krvy in /home/krvy/Projects/emomgr)
+2025-04-30T10:45:36.981+08:00  INFO 37371 --- [main] com.example.MyApplication                : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T10:45:37.920+08:00  INFO 37371 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-30T10:45:37.925+08:00  INFO 37371 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T10:45:37.925+08:00  INFO 37371 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-04-30T10:45:37.984+08:00  INFO 37371 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T10:45:37.984+08:00  INFO 37371 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 915 ms
+2025-04-30T10:45:38.227+08:00  INFO 37371 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-30T10:45:38.241+08:00  INFO 37371 --- [main] com.example.MyApplication                : Started MyApplication in 1.615 seconds (process running for 1.875)
+2025-04-30T10:45:48.622+08:00  INFO 37371 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T10:45:48.623+08:00  INFO 37371 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T10:45:48.623+08:00  INFO 37371 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-04-30T10:48:14.656+08:00  INFO 39676 --- [main] com.example.MyApplication                : Starting MyApplication v1.0.0 using Java 24.0.1 with PID 39676 (/home/krvy/Projects/emomgr/target/emomgr-1.0.0.jar started by krvy in /home/krvy/Projects/emomgr)
+2025-04-30T10:48:14.658+08:00  INFO 39676 --- [main] com.example.MyApplication                : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T10:48:15.539+08:00  INFO 39676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-30T10:48:15.545+08:00  INFO 39676 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T10:48:15.545+08:00  INFO 39676 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-04-30T10:48:15.603+08:00  INFO 39676 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T10:48:15.604+08:00  INFO 39676 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 847 ms
+2025-04-30T10:48:15.849+08:00  INFO 39676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-30T10:48:15.861+08:00  INFO 39676 --- [main] com.example.MyApplication                : Started MyApplication in 1.579 seconds (process running for 1.817)
+2025-04-30T10:50:06.538+08:00  INFO 41055 --- [main] com.example.MyApplication                : Starting MyApplication v1.0.0 using Java 24.0.1 with PID 41055 (/home/krvy/Projects/emomgr/target/emomgr-1.0.0.jar started by krvy in /home/krvy/Projects/emomgr)
+2025-04-30T10:50:06.540+08:00  INFO 41055 --- [main] com.example.MyApplication                : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T10:50:07.493+08:00  INFO 41055 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-30T10:50:07.560+08:00  INFO 41055 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 906 ms
+2025-04-30T10:50:07.843+08:00  INFO 41055 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-30T10:50:07.858+08:00  INFO 41055 --- [main] com.example.MyApplication                : Started MyApplication in 1.707 seconds (process running for 1.98)
+2025-04-30T10:52:15.939+08:00  INFO 42933 --- [emomgr] [main] com.example.MyApplication                : Starting MyApplication v1.0.0 using Java 24.0.1 with PID 42933 (/home/krvy/Projects/emomgr/target/emomgr-1.0.0.jar started by krvy in /home/krvy/Projects/emomgr)
+2025-04-30T10:52:15.945+08:00  INFO 42933 --- [emomgr] [main] com.example.MyApplication                : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T10:52:16.750+08:00  INFO 42933 --- [emomgr] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T10:52:16.760+08:00  INFO 42933 --- [emomgr] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T10:52:16.760+08:00  INFO 42933 --- [emomgr] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-04-30T10:52:16.784+08:00  INFO 42933 --- [emomgr] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T10:52:16.785+08:00  INFO 42933 --- [emomgr] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 781 ms
+2025-04-30T10:52:17.142+08:00  INFO 42933 --- [emomgr] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T10:52:17.155+08:00  INFO 42933 --- [emomgr] [main] com.example.MyApplication                : Started MyApplication in 1.693 seconds (process running for 1.95)
+2025-04-30T10:52:18.890+08:00  INFO 42933 --- [emomgr] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T10:52:18.894+08:00  INFO 42933 --- [emomgr] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
