@@ -1,7 +1,8 @@
 package com.krvy.emomgr.service;
 
+import com.krvy.emomgr.Repository.UserRepository;
 import com.krvy.emomgr.database.User;
-import com.krvy.emomgr.database.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,4 +33,13 @@ public class UserService {
         return userRepository.findPasswordByUsername(username);
     }
 
+    // 检查用户名是否存在
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    // 保存用户
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
 }

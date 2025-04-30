@@ -87,4 +87,12 @@ public class User {
     public int getAge() {
         return this.age;
     }
+
+    public void setSex(int i) {
+        this.sex = i;
+    }
+
+    public void setAge(int i) {
+        this.age = i;
+    }
 }
