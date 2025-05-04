@@ -18,8 +18,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     public String findPasswordByUsername(String username);
 
     boolean existsByUsername(String username);
-
-    default User saveUser(User user) {
-        return save(user);
-    }
 }

@@ -22,4 +22,8 @@ public class Department {
 
     @Column(name = "update_time")
     private Date updateTime;
+
+    public Long getId() {
+        return id;
+    }
 }

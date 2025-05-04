@@ -25,4 +25,12 @@ public class Salary {
 
     @Column(name = "update_time", nullable = false, unique = true, length = 50)
     private Date updateTime;
+
+    public String getEmployeeID() {
+        return employeeId.toString();
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
