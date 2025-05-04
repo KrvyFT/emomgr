@@ -10,4 +10,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     boolean existsByName(String name);
 
     boolean existsByCode(String code);
+
+    Employee update(Employee employee);
 }

@@ -77,7 +77,7 @@ public class AuthController {
             user.setCreateTime(date);
             user.setUpdateTime(date);
 
-            userService.saveUser(user);
+            userService.save(user);
 
             String token = JwtUtil.generateToken(username);
 
