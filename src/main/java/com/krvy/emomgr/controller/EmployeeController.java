@@ -1,22 +1,51 @@
 package com.krvy.emomgr.controller;
 
+import java.util.List;
+
+import org.apache.tomcat.util.http.parser.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.krvy.emomgr.database.Employee;
 import com.krvy.emomgr.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+@RestController
+@RequestMapping("/api/employees")
 public class EmployeeController {
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-    public Employee getEmployeeById(long id) {
-        var employee = employeeService.findById(id);
-        if (employee.isPresent()) {
-            return employee.get();
-        } else {
-            throw new RuntimeException("Employee not found with id: " + id);
-        }
+    @GetMapping
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> employees = (List<Employee>) employeeService.findAll();
+        return ResponseEntity.ok(employees);
     }
 
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable Long id) {
+        return employeeService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
+        employee.setUpdateTime(null);
+        employee.setCreateTime(null);
+        System.out.println(employee);
+        Employee savedEmployee = employeeService.save(employee);
+        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+    }
 }

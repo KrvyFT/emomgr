@@ -11,11 +11,4 @@ import java.util.Optional;
 @Repository
 public interface SalaryRepository extends JpaRepository<Salary, Long> {
 
-    List<Salary> findByEmployeeId(Long employeeId);
-
-    Optional<Salary> findTopByEmployeeIdOrderByEffectiveDateDesc(Long employeeId);
-
-    List<Salary> findByAmountGreaterThan(Double amount);
-
-    List<Salary> findByEffectiveDateBetween(java.time.LocalDate startDate, java.time.LocalDate endDate);
 }

@@ -3,13 +3,19 @@ package com.krvy.emomgr.service;
 import com.krvy.emomgr.database.Employee;
 import com.krvy.emomgr.repository.EmployeeRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class EmployeeService implements Services<Employee> {
-    private EmployeeRepository employeeRepository;
+
+    private final EmployeeRepository employeeRepository;
+
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public Employee save(Employee entity) {

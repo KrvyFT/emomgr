@@ -15,6 +15,9 @@ spring:
       max-lifetime: 60000
       maximum-pool-size: 20
       minimum-idle: 1
+    autoconfigure:
+      exclude:
+        - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
 pebble:
   # 默认为".peb"，改为"":
