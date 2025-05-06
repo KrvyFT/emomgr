@@ -32,17 +32,15 @@ public class EmployeeService implements Services<Employee> {
     }
 
     @Override
-    public Employee update(Employee entity) {
-        if (entity == null) {
-            throw new IllegalArgumentException("Entity cannot be null");
-        }
-        if (entity.getId() == null) {
-            throw new IllegalArgumentException("Entity ID cannot be null for update operation");
-        }
-        if (!employeeRepository.existsById(entity.getId())) {
-            throw new IllegalArgumentException("Cannot update non-existent employee with ID: " + entity.getId());
-        }
-        return employeeRepository.save(entity);
+    public Employee update(Long id, Employee entity) {
+        return employeeRepository.findById(id)
+                .map(existingEmployee -> {
+                    existingEmployee.setName(entity.getName());
+                    existingEmployee.setPosition(entity.getPosition());
+                    existingEmployee.setDepartmentId(entity.getDepartmentId());
+                    return employeeRepository.save(existingEmployee);
+                })
+                .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
     }
 
     @Override

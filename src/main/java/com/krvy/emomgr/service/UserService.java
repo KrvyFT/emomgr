@@ -41,17 +41,20 @@ public class UserService implements Services<User> {
     }
 
     @Override
-    public User update(User entity) {
-        if (entity == null) {
-            throw new IllegalArgumentException("Entity cannot be null");
-        }
-        if (entity.getId() == null) {
-            throw new IllegalArgumentException("Entity ID cannot be null for update operation");
-        }
-        if (!userRepository.existsById(entity.getId())) {
-            throw new IllegalArgumentException("Cannot update non-existent user with ID: " + entity.getId());
-        }
-        return userRepository.save(entity);
+    public User update(Long id, User entity) {
+        return userRepository.findById(id)
+                .map(existingUser -> {
+                    if (entity.getId() == null) {
+                        throw new IllegalArgumentException("Entity ID cannot be null for update operation");
+                    }
+                    existingUser.setUsername(entity.getUsername());
+                    existingUser.setPassword(entity.getPassword());
+                    existingUser.setAvatar(entity.getAvatar());
+                    existingUser.setSex(entity.getSex());
+                    existingUser.setAge(entity.getAge());
+                    return userRepository.save(existingUser);
+                })
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
     @Override

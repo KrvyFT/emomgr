@@ -27,17 +27,14 @@ public class DepartmentService implements Services<Department> {
     }
 
     @Override
-    public Department update(Department entity) {
-        if (entity == null) {
-            throw new IllegalArgumentException("Entity cannot be null");
-        }
-        if (entity.getId() == null) {
-            throw new IllegalArgumentException("Entity ID cannot be null for update operation");
-        }
-        if (!departmentRepository.existsById(entity.getId())) {
-            throw new IllegalArgumentException("Cannot update non-existent department with ID: " + entity.getId());
-        }
-        return departmentRepository.save(entity);
+    public Department update(Long id, Department entity) {
+        return departmentRepository.findById(id)
+                .map(existingDepartment -> {
+                    existingDepartment.setName(entity.getName());
+                    existingDepartment.setDescription(entity.getDescription());
+                    return departmentRepository.save(existingDepartment);
+                })
+                .orElseThrow(() -> new RuntimeException("Department not found with id: " + id));
     }
 
     @Override

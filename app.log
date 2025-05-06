@@ -8300,3 +8300,8 @@ This generated password is for development use only. Your security configuration
 2025-05-06T20:08:56.508+08:00  INFO 260234 --- [emomgr] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-05-06T20:08:56.508+08:00  INFO 260234 --- [emomgr] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-05-06T20:08:56.509+08:00  INFO 260234 --- [emomgr] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-05-06T20:24:29.630+08:00  INFO 260234 --- [emomgr] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-06T20:24:29.632+08:00  INFO 260234 --- [emomgr] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-06T20:24:29.635+08:00  INFO 260234 --- [emomgr] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-06T20:24:29.637+08:00  INFO 260234 --- [emomgr] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-06T20:24:29.638+08:00  INFO 260234 --- [emomgr] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

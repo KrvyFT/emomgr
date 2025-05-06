@@ -26,8 +26,48 @@ public class Salary {
     @Column(name = "update_time", nullable = false, unique = true, length = 50)
     private Date updateTime;
 
-    public String getEmployeeID() {
-        return employeeId.toString();
+    public Long getEmployeeID() {
+        return employeeId;
+    }
+
+    public void setEmployeeID(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public int getSalaryAmount() {
+        return salaryAmount;
+    }
+
+    public void setSalaryAmount(int salaryAmount) {
+        this.salaryAmount = salaryAmount;
+    }
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

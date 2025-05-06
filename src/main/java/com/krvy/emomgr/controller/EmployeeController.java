@@ -15,6 +15,7 @@ import com.krvy.emomgr.service.EmployeeService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -42,5 +43,12 @@ public class EmployeeController {
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
         Employee savedEmployee = employeeService.save(employee);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable long id,
+            @Valid @RequestBody Employee employeeDetails) {
+        Employee updatedEmployee = employeeService.update(id, employeeDetails);
+        return ResponseEntity.ok(updatedEmployee);
     }
 }

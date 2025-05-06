@@ -36,17 +36,18 @@ public class SalaryService implements Services<Salary> {
     }
 
     @Override
-    public Salary update(Salary entity) {
-        if (entity == null) {
-            throw new IllegalArgumentException("Entity cannot be null");
-        }
-        if (entity.getEmployeeID() == null) {
-            throw new IllegalArgumentException("Employee ID cannot be null for update operation");
-        }
-        if (!salaryRepository.existsById(entity.getId())) {
-            throw new IllegalArgumentException("Cannot update non-existent salary with ID: " + entity.getId());
-        }
-        return salaryRepository.save(entity);
+    public Salary update(Long id, Salary entity) {
+        return salaryRepository.findById(id)
+                .map(existingSalary -> {
+                    if (entity.getEmployeeID() == null) {
+                        throw new IllegalArgumentException("Employee ID cannot be null for update operation");
+                    }
+                    existingSalary.setEmployeeID(entity.getEmployeeID());
+                    existingSalary.setSalaryAmount(entity.getSalaryAmount());
+                    existingSalary.setPayDate(entity.getPayDate());
+                    return salaryRepository.save(existingSalary);
+                })
+                .orElseThrow(() -> new RuntimeException("Salary not found with id: " + id));
     }
 
     @Override

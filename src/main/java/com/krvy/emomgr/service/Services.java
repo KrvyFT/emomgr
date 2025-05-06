@@ -13,7 +13,7 @@ public interface Services<T> {
     Iterable<T> findAll();
 
     // Update an entity
-    T update(T entity);
+    T update(Long id, T entity);
 
     // Delete an entity by ID
     void deleteById(Long id);
