@@ -3,7 +3,6 @@ package com.krvy.emomgr.service;
 import com.krvy.emomgr.database.Employee;
 import com.krvy.emomgr.repository.EmployeeRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
