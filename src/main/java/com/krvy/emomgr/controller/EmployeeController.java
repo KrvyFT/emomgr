@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) {
+    public Employee ResponseEntity(@PathVariable Long id) {
         return employeeService.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
     }
@@ -50,5 +51,11 @@ public class EmployeeController {
             @Valid @RequestBody Employee employeeDetails) {
         Employee updatedEmployee = employeeService.update(id, employeeDetails);
         return ResponseEntity.ok(updatedEmployee);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable long id) {
+        employeeService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
