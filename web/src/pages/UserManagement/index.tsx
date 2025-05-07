@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Table,
-  Button,
   Space,
   Modal,
   Form,
   Input,
   Radio,
-  message,
   Popconfirm,
   Card,
   Avatar,
+  Button,
 } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, UserOutlined } from '@ant-design/icons';
 import { apiService } from '../../services';
 import { User } from '../../types';
+import { showSuccess, showError, showNotification, crudMessages } from '../../utils/notification';
+import AnimatedTable from '../../components/common/AnimatedTable';
+import AnimatedButton from '../../components/common/AnimatedButton';
 
 const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -29,8 +30,13 @@ const UserManagement: React.FC = () => {
       setLoading(true);
       const data = await apiService.user.getAll();
       setUsers(data);
+      showSuccess(crudMessages.querySuccess);
     } catch (error) {
-      message.error('获取用户列表失败');
+      showNotification(
+        'error',
+        crudMessages.queryError,
+        '获取用户列表时发生错误，请稍后重试',
+      );
       console.error(error);
     } finally {
       setLoading(false);
@@ -67,10 +73,18 @@ const UserManagement: React.FC = () => {
   const handleDelete = async (id: number) => {
     try {
       await apiService.user.delete(id);
-      message.success('删除用户成功');
+      showNotification(
+        'success',
+        crudMessages.deleteSuccess,
+        `ID为${id}的用户已成功删除`
+      );
       fetchUsers();
     } catch (error) {
-      message.error('删除用户失败');
+      showNotification(
+        'error',
+        crudMessages.deleteError,
+        '删除用户时发生错误，请稍后重试',
+      );
       console.error(error);
     }
   };
@@ -78,21 +92,34 @@ const UserManagement: React.FC = () => {
   const handleModalOk = async () => {
     try {
       const values = await form.validateFields();
-      
+
       if (editingId) {
         await apiService.user.update(editingId, values);
-        message.success('更新用户成功');
+        showNotification(
+          'success',
+          crudMessages.updateSuccess,
+          `用户 ${values.username} 已成功更新`
+        );
       } else {
         await apiService.user.create({
           ...values,
           password: values.password || '123456', // 默认密码
         });
-        message.success('添加用户成功');
+        showNotification(
+          'success',
+          crudMessages.createSuccess,
+          `用户 ${values.username} 已成功创建`
+        );
       }
-      
+
       setModalVisible(false);
       fetchUsers();
     } catch (error) {
+      if (error instanceof Error) {
+        showError(`操作失败: ${error.message}`);
+      } else {
+        showError('表单验证失败，请检查输入');
+      }
       console.error('表单验证失败:', error);
     }
   };
@@ -148,28 +175,28 @@ const UserManagement: React.FC = () => {
       width: 150,
       render: (_: any, record: User) => (
         <Space size="small">
-          <Button 
-            type="primary" 
-            icon={<EditOutlined />} 
+          <AnimatedButton
+            type="primary"
+            icon={<EditOutlined />}
             onClick={() => handleEdit(record)}
             size="small"
           >
             编辑
-          </Button>
+          </AnimatedButton>
           <Popconfirm
             title="确定要删除这个用户吗？"
             onConfirm={() => handleDelete(record.id)}
             okText="确定"
             cancelText="取消"
           >
-            <Button 
-              danger 
+            <AnimatedButton
+              danger
               icon={<DeleteOutlined />}
               size="small"
               disabled={record.username === 'admin'} // 防止删除管理员账户
             >
               删除
-            </Button>
+            </AnimatedButton>
           </Popconfirm>
         </Space>
       ),
@@ -177,26 +204,31 @@ const UserManagement: React.FC = () => {
   ];
 
   return (
-    <Card title="用户管理" className="shadow-md">
-      <div className="mb-4">
-        <Button
+    <Card title="用户管理" className="shadow-md card-hover-effect">
+      <div className="mb-4 add-component-animation">
+        <AnimatedButton
           type="primary"
           icon={<PlusOutlined />}
           onClick={handleAdd}
           className="bg-blue-500"
+          rippleEffect={true}
+          hoverScale={true}
         >
           添加用户
-        </Button>
+        </AnimatedButton>
       </div>
 
-      <Table
-        columns={columns}
-        dataSource={users}
-        rowKey="id"
-        loading={loading}
-        pagination={{ pageSize: 10 }}
-        scroll={{ x: 900 }}
-      />
+      <div className="fade-in">
+        <AnimatedTable
+          columns={columns}
+          dataSource={users}
+          rowKey="id"
+          loading={loading}
+          pagination={{ pageSize: 10 }}
+          scroll={{ x: 900 }}
+          highlightNewItems={true}
+        />
+      </div>
 
       <Modal
         title={modalTitle}
@@ -205,6 +237,7 @@ const UserManagement: React.FC = () => {
         onCancel={() => setModalVisible(false)}
         okText="确定"
         cancelText="取消"
+        className="modal-animation-enter"
       >
         <Form form={form} layout="vertical">
           <Form.Item
@@ -214,7 +247,7 @@ const UserManagement: React.FC = () => {
           >
             <Input placeholder="请输入用户名" />
           </Form.Item>
-          
+
           {!editingId && (
             <Form.Item
               name="password"

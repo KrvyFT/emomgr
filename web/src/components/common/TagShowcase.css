@@ -1,0 +1,47 @@
+/* TagShowcase.css */
+
+.tag-showcase {
+    margin-bottom: 20px;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.setting-label {
+    width: 100px;
+    margin-right: 8px;
+    font-weight: 500;
+}
+
+.tag-section {
+    margin-bottom: 24px;
+}
+
+.mb-4 {
+    margin-bottom: 16px;
+}
+
+/* 标签容器样式 */
+.colorful-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.colorful-tags-container:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* 标签分组标题 */
+.ant-divider-inner-text {
+    font-weight: 600;
+    color: #1a237e;
+}

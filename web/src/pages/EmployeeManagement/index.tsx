@@ -8,7 +8,6 @@ import {
   Input,
   Select,
   DatePicker,
-  message,
   Popconfirm,
   Card,
 } from 'antd';
@@ -16,6 +15,7 @@ import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { apiService } from '../../services';
 import { Employee, Department } from '../../types';
 import dayjs from 'dayjs';
+import { showSuccess, showError, showNotification, crudMessages } from '../../utils/notification';
 
 const EmployeeManagement: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -31,8 +31,13 @@ const EmployeeManagement: React.FC = () => {
       setLoading(true);
       const data = await apiService.employee.getAll();
       setEmployees(data);
+      showSuccess(crudMessages.querySuccess);
     } catch (error) {
-      message.error('获取员工列表失败');
+      showNotification(
+        'error',
+        crudMessages.queryError,
+        '获取员工列表时发生错误，请稍后重试',
+      );
       console.error(error);
     } finally {
       setLoading(false);
@@ -44,7 +49,11 @@ const EmployeeManagement: React.FC = () => {
       const data = await apiService.department.getAll();
       setDepartments(data);
     } catch (error) {
-      message.error('获取部门列表失败');
+      showNotification(
+        'error',
+        crudMessages.queryError,
+        '获取部门列表时发生错误，请稍后重试',
+      );
       console.error(error);
     }
   };
@@ -76,10 +85,18 @@ const EmployeeManagement: React.FC = () => {
   const handleDelete = async (id: number) => {
     try {
       await apiService.employee.delete(id);
-      message.success('删除员工成功');
+      showNotification(
+        'success',
+        crudMessages.deleteSuccess,
+        `ID为${id}的员工已成功删除`,
+      );
       fetchEmployees();
     } catch (error) {
-      message.error('删除员工失败');
+      showNotification(
+        'error',
+        crudMessages.deleteError,
+        '删除员工时发生错误，可能该员工还有关联的薪资记录',
+      );
       console.error(error);
     }
   };
@@ -92,18 +109,31 @@ const EmployeeManagement: React.FC = () => {
         ...values,
         hireDate: values.hireDate ? values.hireDate.format('YYYY-MM-DD') : '',
       };
-      
+
       if (editingId) {
         await apiService.employee.update(editingId, formattedValues);
-        message.success('更新员工成功');
+        showNotification(
+          'success',
+          crudMessages.updateSuccess,
+          `员工 ${formattedValues.name} 信息已成功更新`,
+        );
       } else {
         await apiService.employee.create(formattedValues);
-        message.success('添加员工成功');
+        showNotification(
+          'success',
+          crudMessages.createSuccess,
+          `员工 ${formattedValues.name} 已成功添加`,
+        );
       }
-      
+
       setModalVisible(false);
       fetchEmployees();
     } catch (error) {
+      if (error instanceof Error) {
+        showError(`操作失败: ${error.message}`);
+      } else {
+        showError('表单验证失败，请检查输入');
+      }
       console.error('表单验证失败:', error);
     }
   };
@@ -164,9 +194,9 @@ const EmployeeManagement: React.FC = () => {
       width: 150,
       render: (_: any, record: Employee) => (
         <Space size="small">
-          <Button 
-            type="primary" 
-            icon={<EditOutlined />} 
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
             onClick={() => handleEdit(record)}
             size="small"
           >
@@ -178,8 +208,8 @@ const EmployeeManagement: React.FC = () => {
             okText="确定"
             cancelText="取消"
           >
-            <Button 
-              danger 
+            <Button
+              danger
               icon={<DeleteOutlined />}
               size="small"
             >

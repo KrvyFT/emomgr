@@ -1,0 +1,39 @@
+.gsap-debug {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px 0;
+    background: white;
+}
+
+.debug-status {
+    margin: 10px 0;
+}
+
+.debug-status .loading {
+    color: #ff9800;
+}
+
+.debug-status .success {
+    color: #4caf50;
+}
+
+.debug-status .error {
+    color: #f44336;
+}
+
+.debug-error {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ffebee;
+    border-radius: 4px;
+    color: #c62828;
+}
+
+.debug-box {
+    width: 50px;
+    height: 50px;
+    background: #1a237e;
+    border-radius: 4px;
+    margin-top: 20px;
+}

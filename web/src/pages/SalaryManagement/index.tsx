@@ -8,7 +8,6 @@ import {
   Input,
   Select,
   DatePicker,
-  message,
   Popconfirm,
   Card,
 } from 'antd';
@@ -16,6 +15,7 @@ import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { apiService } from '../../services';
 import { Salary, Employee } from '../../types';
 import dayjs from 'dayjs';
+import { showSuccess, showError, showNotification, crudMessages } from '../../utils/notification';
 
 const SalaryManagement: React.FC = () => {
   const [salaries, setSalaries] = useState<Salary[]>([]);
@@ -31,8 +31,13 @@ const SalaryManagement: React.FC = () => {
       setLoading(true);
       const data = await apiService.salary.getAll();
       setSalaries(data);
+      showSuccess(crudMessages.querySuccess);
     } catch (error) {
-      message.error('获取薪资列表失败');
+      showNotification(
+        'error',
+        crudMessages.queryError,
+        '获取薪资列表时发生错误，请稍后重试',
+      );
       console.error(error);
     } finally {
       setLoading(false);
@@ -44,7 +49,11 @@ const SalaryManagement: React.FC = () => {
       const data = await apiService.employee.getAll();
       setEmployees(data);
     } catch (error) {
-      message.error('获取员工列表失败');
+      showNotification(
+        'error',
+        crudMessages.queryError,
+        '获取员工列表时发生错误，请稍后重试',
+      );
       console.error(error);
     }
   };
@@ -78,10 +87,18 @@ const SalaryManagement: React.FC = () => {
   const handleDelete = async (id: number) => {
     try {
       await apiService.salary.delete(id);
-      message.success('删除薪资记录成功');
+      showNotification(
+        'success',
+        crudMessages.deleteSuccess,
+        `ID为${id}的薪资记录已成功删除`,
+      );
       fetchSalaries();
     } catch (error) {
-      message.error('删除薪资记录失败');
+      showNotification(
+        'error',
+        crudMessages.deleteError,
+        '删除薪资记录时发生错误，请稍后重试',
+      );
       console.error(error);
     }
   };
@@ -94,18 +111,33 @@ const SalaryManagement: React.FC = () => {
         ...values,
         payDate: values.payDate ? values.payDate.format('YYYY-MM-DD') : '',
       };
-      
+
+      const employeeName = getEmployeeName(formattedValues.employeeId);
+
       if (editingId) {
         await apiService.salary.update(editingId, formattedValues);
-        message.success('更新薪资记录成功');
+        showNotification(
+          'success',
+          crudMessages.updateSuccess,
+          `${employeeName}的薪资记录已成功更新`,
+        );
       } else {
         await apiService.salary.create(formattedValues);
-        message.success('添加薪资记录成功');
+        showNotification(
+          'success',
+          crudMessages.createSuccess,
+          `已成功添加${employeeName}的薪资记录`,
+        );
       }
-      
+
       setModalVisible(false);
       fetchSalaries();
     } catch (error) {
+      if (error instanceof Error) {
+        showError(`操作失败: ${error.message}`);
+      } else {
+        showError('表单验证失败，请检查输入');
+      }
       console.error('表单验证失败:', error);
     }
   };
@@ -161,9 +193,9 @@ const SalaryManagement: React.FC = () => {
       width: 150,
       render: (_: any, record: Salary) => (
         <Space size="small">
-          <Button 
-            type="primary" 
-            icon={<EditOutlined />} 
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
             onClick={() => handleEdit(record)}
             size="small"
           >
@@ -175,8 +207,8 @@ const SalaryManagement: React.FC = () => {
             okText="确定"
             cancelText="取消"
           >
-            <Button 
-              danger 
+            <Button
+              danger
               icon={<DeleteOutlined />}
               size="small"
             >

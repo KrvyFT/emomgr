@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message, Card, Tabs, Radio } from 'antd';
+import { Form, Input, Button, Card, Tabs, Radio } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { showSuccess, showError, showNotification } from '../../utils/notification';
 
 const { TabPane } = Tabs;
 
@@ -26,10 +27,18 @@ const Login: React.FC = () => {
     try {
       setLoading(true);
       await login(values.username, values.password);
-      message.success('登录成功！');
+      showNotification(
+        'success',
+        '登录成功',
+        `欢迎回来，${values.username}！`,
+      );
       navigate('/admin/employees');
     } catch (error: any) {
-      message.error(error.message || '登录失败，请重试！');
+      showNotification(
+        'error',
+        '登录失败',
+        error.message || '用户名或密码错误，请重试！',
+      );
     } finally {
       setLoading(false);
     }
@@ -39,10 +48,18 @@ const Login: React.FC = () => {
     try {
       setLoading(true);
       await register(values.username, values.password, values.age, values.sex);
-      message.success('注册成功！');
+      showNotification(
+        'success',
+        '注册成功',
+        `账号 ${values.username} 已创建，欢迎加入！`,
+      );
       navigate('/admin/employees');
     } catch (error: any) {
-      message.error(error.message || '注册失败，请重试！');
+      showNotification(
+        'error',
+        '注册失败',
+        error.message || '该用户名可能已被使用，请尝试其他用户名。',
+      );
     } finally {
       setLoading(false);
     }
@@ -68,9 +85,9 @@ const Login: React.FC = () => {
                 name="username"
                 rules={[{ required: true, message: '请输入用户名！' }]}
               >
-                <Input 
-                  prefix={<UserOutlined className="site-form-item-icon" />} 
-                  placeholder="用户名" 
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="用户名"
                   size="large"
                 />
               </Form.Item>
@@ -110,9 +127,9 @@ const Login: React.FC = () => {
                 name="username"
                 rules={[{ required: true, message: '请输入用户名！' }]}
               >
-                <Input 
-                  prefix={<UserOutlined className="site-form-item-icon" />} 
-                  placeholder="用户名" 
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="用户名"
                   size="large"
                 />
               </Form.Item>
