@@ -15,7 +15,7 @@ public class Application {
     }
 
     @Bean
-    WebMvcConfigurer createWebMvcConfigurer(@Autowired HandlerInterceptor[] interceptors) {
+    WebMvcConfigurer createResourceConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -25,5 +25,4 @@ public class Application {
             }
         };
     }
-
 }

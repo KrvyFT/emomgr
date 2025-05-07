@@ -1,20 +1,20 @@
 package com.krvy.emomgr.database;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Employee")
+@Table(name = "employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 100, nullable = true)
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
 
-    @Column(name = "department_id", nullable = true)
+    @Column(name = "department_id", nullable = false)
     private Long departmentId;
 
     @Column(name = "position", length = 100)

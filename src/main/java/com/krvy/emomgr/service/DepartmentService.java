@@ -2,6 +2,7 @@ package com.krvy.emomgr.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.krvy.emomgr.database.Department;
@@ -9,6 +10,7 @@ import com.krvy.emomgr.repository.DepartmentRepository;
 
 @Service
 public class DepartmentService implements Services<Department> {
+    @Autowired
     private DepartmentRepository departmentRepository;
 
     @Override

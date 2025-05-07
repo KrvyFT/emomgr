@@ -14,30 +14,18 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-    // @Bean
-    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
-    // Exception {
-    // http.csrf(csrf -> csrf.disable())
-    // .authorizeRequests(requests -> requests
-    // .requestMatchers("/auth/**").permitAll()
-    // .anyRequest().authenticated())
-    // .sessionManagement(management ->
-    // management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-    // http.addFilterBefore(jwtAuthenticationFilter,
-    // org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
-
-    // return http.build();
-    // }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll());
+        http.cors().and()
+            .csrf().disable()
+            .authorizeRequests(requests -> requests
+                .anyRequest().permitAll())  // 允许所有请求，无需认证
+            .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        // 移除JWT过滤器，暂时完全禁用认证
+        // http.addFilterBefore(jwtAuthenticationFilter,
+        //        org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-
 }

@@ -6,6 +6,7 @@ import com.krvy.emomgr.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -17,12 +18,6 @@ public class UserService implements Services<User> {
     public User save(User entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity cannot be null");
-        }
-        if (entity.getId() == null) {
-            throw new IllegalArgumentException("Entity ID cannot be null for update operation");
-        }
-        if (!userRepository.existsById(entity.getId())) {
-            throw new IllegalArgumentException("Cannot update non-existent user with ID: " + entity.getId());
         }
         return userRepository.save(entity);
     }
@@ -44,14 +39,16 @@ public class UserService implements Services<User> {
     public User update(Long id, User entity) {
         return userRepository.findById(id)
                 .map(existingUser -> {
-                    if (entity.getId() == null) {
-                        throw new IllegalArgumentException("Entity ID cannot be null for update operation");
-                    }
                     existingUser.setUsername(entity.getUsername());
-                    existingUser.setPassword(entity.getPassword());
-                    existingUser.setAvatar(entity.getAvatar());
+                    if (entity.getPassword() != null) {
+                        existingUser.setPassword(entity.getPassword());
+                    }
+                    if (entity.getAvatar() != null) {
+                        existingUser.setAvatar(entity.getAvatar());
+                    }
                     existingUser.setSex(entity.getSex());
                     existingUser.setAge(entity.getAge());
+                    existingUser.setUpdateTime(new Date());
                     return userRepository.save(existingUser);
                 })
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));

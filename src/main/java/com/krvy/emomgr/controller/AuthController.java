@@ -4,11 +4,14 @@ import com.krvy.emomgr.database.User;
 import com.krvy.emomgr.service.UserService;
 import com.krvy.emomgr.util.JwtUtil;
 
-import java.sql.Date;
+import jakarta.validation.Valid;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +22,11 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> loginRequest) {
+        String username = loginRequest.get("username");
+        String password = loginRequest.get("password");
         var pwd = userService.findPasswordByUsername(username);
+        var user = userService.getUserByUsername(username);
         Map<String, Object> response = new HashMap<>();
         if (pwd == null) {
             response.put("status", "error");
@@ -28,8 +34,7 @@ public class AuthController {
             return ResponseEntity.status(404).body(response);
         }
         try {
-            if (username.equals(username) && pwd.equals(password)) {
-                User user = userService.getUserByUsername(username);
+            if (username.equals(user.getUsername()) && pwd.equals(password)) {
                 String token = JwtUtil.generateToken(username);
                 response.put("id", user.getId());
                 response.put("username", user.getUsername());
@@ -53,10 +58,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> register(
-            @RequestParam String username,
-            @RequestParam String password,
-            @RequestParam int Age,
-            @RequestParam int Sex) {
+            @RequestBody User registerRequest) {
+        String username = registerRequest.getUsername();
+        String password = registerRequest.getPassword();
+        int age = registerRequest.getAge();
+        int sex = registerRequest.getSex();
+
         Map<String, Object> response = new HashMap<>();
         if (userService.existsByUsername(username)) {
             response.put("status", "error");
@@ -68,8 +75,8 @@ public class AuthController {
             User user = new User();
             user.setUsername(username);
             user.setPassword(password);
-            user.setAge(Age);
-            user.setSex(Sex);
+            user.setAge(age);
+            user.setSex(sex);
             user.setAvatar("Default");
 
             long millis = System.currentTimeMillis();
@@ -94,6 +101,7 @@ public class AuthController {
         } catch (Exception e) {
             response.put("status", "error");
             response.put("message", "Error creating user: " + e.getMessage());
+            System.err.println("Error creating user: " + e.getMessage());
             return ResponseEntity.status(500).body(response);
         }
     }

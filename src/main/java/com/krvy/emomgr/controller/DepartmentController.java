@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,9 +36,10 @@ public class DepartmentController {
     }
 
     @GetMapping("/{id}")
-    public Department ResponseEntity(@PathVariable Long id) {
-        return departmentService.findById(id)
+    public ResponseEntity<Department> getDepartmentById(@PathVariable Long id) {
+        Department department = departmentService.findById(id)
                 .orElseThrow(() -> new RuntimeException("Department not found with id: " + id));
+        return ResponseEntity.ok(department);
     }
 
     @PostMapping

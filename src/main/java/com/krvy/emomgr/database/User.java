@@ -1,6 +1,6 @@
 package com.krvy.emomgr.database;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.*;
 
@@ -17,10 +17,10 @@ public class User {
     @Column(name = "update_time")
     private Date updateTime;
 
-    @Column(name = "username", nullable = true, unique = true, length = 255)
+    @Column(name = "username", nullable = false, length = 255)
     private String username;
 
-    @Column(name = "password", nullable = true, length = 255)
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
 
     @Column(name = "avatar", length = 255)
@@ -88,11 +88,11 @@ public class User {
         return this.age;
     }
 
-    public void setSex(int i) {
-        this.sex = i;
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 
-    public void setAge(int i) {
-        this.age = i;
+    public void setAge(int age) {
+        this.age = age;
     }
 }

@@ -2,6 +2,7 @@ package com.krvy.emomgr.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.krvy.emomgr.database.Salary;
@@ -9,15 +10,13 @@ import com.krvy.emomgr.repository.SalaryRepository;
 
 @Service
 public class SalaryService implements Services<Salary> {
+    @Autowired
     private SalaryRepository salaryRepository;
 
     @Override
     public Salary save(Salary entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity cannot be null");
-        }
-        if (entity.getEmployeeID() == null) {
-            throw new IllegalArgumentException("Employee ID cannot be null for save operation");
         }
         return salaryRepository.save(entity);
     }
@@ -39,12 +38,15 @@ public class SalaryService implements Services<Salary> {
     public Salary update(Long id, Salary entity) {
         return salaryRepository.findById(id)
                 .map(existingSalary -> {
-                    if (entity.getEmployeeID() == null) {
-                        throw new IllegalArgumentException("Employee ID cannot be null for update operation");
+                    if (entity.getEmployeeId() != null) {
+                        existingSalary.setEmployeeId(entity.getEmployeeId());
                     }
-                    existingSalary.setEmployeeID(entity.getEmployeeID());
-                    existingSalary.setSalaryAmount(entity.getSalaryAmount());
-                    existingSalary.setPayDate(entity.getPayDate());
+                    if (entity.getAmount() != null) {
+                        existingSalary.setAmount(entity.getAmount());
+                    }
+                    if (entity.getPayDate() != null) {
+                        existingSalary.setPayDate(entity.getPayDate());
+                    }
                     return salaryRepository.save(existingSalary);
                 })
                 .orElseThrow(() -> new RuntimeException("Salary not found with id: " + id));

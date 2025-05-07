@@ -1,6 +1,7 @@
 package com.krvy.emomgr.database;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Date;
 
 import jakarta.persistence.*;
 
@@ -11,35 +12,43 @@ public class Salary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "employee_id", nullable = true, unique = true, length = 50)
+    @Column(name = "employee_id", nullable = false)
     private Long employeeId;
 
-    @Column(name = "salary_amount", nullable = true, unique = false, length = 50)
-    private int salaryAmount;
+    @Column(name = "amount", nullable = false)
+    private BigDecimal amount;
 
-    @Column(name = "pay_date", nullable = true, unique = false, length = 50)
+    @Column(name = "pay_date", nullable = false)
     private Date payDate;
 
-    @Column(name = "create_time", nullable = false, unique = true, length = 50)
+    @Column(name = "create_time")
     private Date createTime;
 
-    @Column(name = "update_time", nullable = false, unique = true, length = 50)
+    @Column(name = "update_time")
     private Date updateTime;
 
-    public Long getEmployeeID() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeID(Long employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public int getSalaryAmount() {
-        return salaryAmount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setSalaryAmount(int salaryAmount) {
-        this.salaryAmount = salaryAmount;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getSalaryAmount() {
+        return amount;
+    }
+
+    public void setSalaryAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Date getPayDate() {

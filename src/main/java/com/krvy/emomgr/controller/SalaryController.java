@@ -1,9 +1,11 @@
 package com.krvy.emomgr.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,33 +31,60 @@ public class SalaryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Salary>> getAllSalarys() {
-        List<Salary> salarys = (List<Salary>) salaryService.findAll();
-        return ResponseEntity.ok(salarys);
+    public ResponseEntity<?> getAllSalaries() {
+        try {
+            List<Salary> salaries = new ArrayList<>();
+            salaryService.findAll().forEach(salaries::add);
+            return ResponseEntity.ok(salaries);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error retrieving salaries: " + e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
-    public Salary ResponseEntity(@PathVariable Long id) {
-        return salaryService.findById(id)
-                .orElseThrow(() -> new RuntimeException("Salary not found with id: " + id));
+    public ResponseEntity<?> getSalaryById(@PathVariable Long id) {
+        try {
+            return salaryService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error retrieving salary: " + e.getMessage());
+        }
     }
 
     @PostMapping
-    public ResponseEntity<Salary> createSalary(@Valid @RequestBody Salary salary) {
-        Salary savedSalary = salaryService.save(salary);
-        return new ResponseEntity<>(savedSalary, HttpStatus.CREATED);
+    public ResponseEntity<?> createSalary(@Valid @RequestBody Salary salary) {
+        try {
+            Salary savedSalary = salaryService.save(salary);
+            return new ResponseEntity<>(savedSalary, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error creating salary: " + e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Salary> updateSalary(@PathVariable long id,
+    public ResponseEntity<?> updateSalary(@PathVariable long id,
             @Valid @RequestBody Salary salaryDetails) {
-        Salary updatedSalary = salaryService.update(id, salaryDetails);
-        return ResponseEntity.ok(updatedSalary);
+        try {
+            Salary updatedSalary = salaryService.update(id, salaryDetails);
+            return ResponseEntity.ok(updatedSalary);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error updating salary: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSalary(@PathVariable long id) {
-        salaryService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> deleteSalary(@PathVariable long id) {
+        try {
+            salaryService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error deleting salary: " + e.getMessage());
+        }
     }
 }

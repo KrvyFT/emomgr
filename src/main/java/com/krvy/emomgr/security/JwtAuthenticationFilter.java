@@ -19,6 +19,11 @@ public class JwtAuthenticationFilter extends org.springframework.web.filter.Once
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        // 简单放行所有请求，不做任何认证检查
+        chain.doFilter(request, response);
+        
+        // 原先的JWT验证逻辑已注释掉
+        /*
         String token = request.getHeader("Authorization");
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
@@ -31,5 +36,6 @@ public class JwtAuthenticationFilter extends org.springframework.web.filter.Once
             }
         }
         chain.doFilter(request, response);
+        */
     }
 }

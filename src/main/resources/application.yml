@@ -4,8 +4,8 @@ spring:
   application:
     name: ${APP_NAME:unnamed}
   datasource:
-    url: jdbc:mariadb://localhost:3306/emodb
-    username: mgr
+    url: jdbc:mariadb://localhost:3306/emomgr
+    username: krvy
     password: vneipack
     driver-class-name: org.mariadb.jdbc.Driver
     hikari:
